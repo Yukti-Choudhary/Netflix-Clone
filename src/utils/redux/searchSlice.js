@@ -4,7 +4,8 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     language: "en",
-    loading: false,
+    loading: null,
+    searchMovies: null,
   },
   reducers: {
     changeLanguage: (state, action) => {
@@ -13,8 +14,13 @@ const searchSlice = createSlice({
     changeLoading: (state, action) => {
       state.loading = action.payload;
     },
+    addSearchMovies: (state, action) => {
+      state.searchMovies = action.payload;
+    },
   },
 });
 
-export const { changeLanguage, changeLoading } = searchSlice.actions;
+export const { changeLanguage, changeLoading, addSearchMovies } =
+  searchSlice.actions;
+
 export default searchSlice.reducer;

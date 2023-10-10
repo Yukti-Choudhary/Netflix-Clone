@@ -1,7 +1,7 @@
 import { useState } from "react";
-import openai from "../utils/openai";
 import { useDispatch } from "react-redux";
-import { changeLoading } from "../utils/redux/searchSlice";
+import { addSearchMovies, changeLoading } from "../utils/redux/searchSlice";
+import { API_OPTIONS } from "../utils/constants";
 
 const useGptSearch = () => {
   const [searchError, setSearchError] = useState(null);
@@ -9,24 +9,27 @@ const useGptSearch = () => {
 
   const getSearchResults = async (searchValue) => {
     dispatch(changeLoading(true));
-    if (!searchValue) return;
-    
-    const getQuery =
-      "Act as movie recommendation system and suggest 6 movie names for the query -" +
-      searchValue +
-      ".Names should be coma separated like the example ahead. Example- Twilight, Avengers,Thor,Gadar, Sholay, Koi Mil Gya.";
 
-    try {
-      const results = await openai.chat.completions.create({
-        messages: [{ role: "user", content: getQuery }],
-        model: "gpt-3.5-turbo",
-      });
+    if (!searchValue) {
+      dispatch(changeLoading(false));
+      return;
+    }
 
-      console.log(results.choices);
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&page=1`,
+      API_OPTIONS
+    );
+    const data = await res.json();
+
+    if (data.results.length > 0) {
+      setSearchError(null);
       dispatch(changeLoading(false));
-    } catch (error) {
-      setSearchError(error.message);
-      dispatch(changeLoading(false));
+      dispatch(addSearchMovies(data.results));
+    } else {
+      setSearchError(
+        "We couldn't find the movie you're looking for. Please try searching for something else!"
+      );
+      dispatch(changeLoading(null));
     }
   };
 

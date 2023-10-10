@@ -47,6 +47,7 @@ const MovieList = ({ title, movies }) => {
           />
 
           {movies?.map((item) => {
+            if (!item.poster_path) return;
             return (
               <CardItem key={item.id}>
                 <CardImage
@@ -61,12 +62,14 @@ const MovieList = ({ title, movies }) => {
             );
           })}
 
-          <img
-            className="right"
-            src="/images/icons/chevron-right.png"
-            alt="right"
-            onClick={() => handleClick("right")}
-          />
+          {movies.length > 5 && (
+            <img
+              className="right"
+              src="/images/icons/chevron-right.png"
+              alt="right"
+              onClick={() => handleClick("right")}
+            />
+          )}
         </CardEntities>
       </Card>
     </CardGroup>

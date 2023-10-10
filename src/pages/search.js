@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchMovieContainer } from "./style/pagesStyle";
 import { HeaderContainer, MovieList, OptForm } from "../components";
 import { useSelector } from "react-redux";
 
@@ -6,7 +7,7 @@ const Search = () => {
   const insideButton = "Go Back";
   const insideRoute = "/browse";
 
-  const loading = useSelector((state) => state.search.loading);
+  const { loading, searchMovies } = useSelector((state) => state.search);
 
   return (
     <>
@@ -18,7 +19,11 @@ const Search = () => {
           </center>
         )}
       </OptForm>
-      {!loading && <MovieList />}
+      <SearchMovieContainer>
+        {loading === false && (
+          <MovieList title="Recommended Movies" movies={searchMovies} />
+        )}
+      </SearchMovieContainer>
     </>
   );
 };
