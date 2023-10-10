@@ -10,6 +10,7 @@ const useGptSearch = () => {
   const getSearchResults = async (searchValue) => {
     dispatch(changeLoading(true));
     if (!searchValue) return;
+    
     const getQuery =
       "Act as movie recommendation system and suggest 6 movie names for the query -" +
       searchValue +

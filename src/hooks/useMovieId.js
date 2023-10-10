@@ -5,7 +5,7 @@ import { addTrailer } from "../utils/redux/moviesSlice";
 
 const useMovieId = (movieId) => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (!movieId) return;
 
