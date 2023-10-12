@@ -24,7 +24,7 @@ import { auth } from "../../utils/firebase";
 import { signOut } from "firebase/auth";
 import useMovieId from "../../hooks/useMovieId";
 import { useSelector } from "react-redux";
-import {  YOUTUBE_URL } from "../../utils/constants";
+import { YOUTUBE_URL } from "../../utils/constants";
 import SearchLanguage from "../searchLanguage";
 
 const HeaderContainer = ({
@@ -65,13 +65,11 @@ const HeaderContainer = ({
               <HeaderLogo alt="Netflix" src={logo} />
             </Link>
 
-            {insideButton === "Search" && 
+            {insideButton === "Search" && (
               <HeaderTextLink>Movies</HeaderTextLink>
-            }
-
+            )}
           </HeaderGroup>
           <HeaderGroup>
-
             {insideButton !== "Search" && <SearchLanguage />}
 
             <HeaderButtonLink to={insideRoute}>{insideButton}</HeaderButtonLink>
@@ -96,7 +94,7 @@ const HeaderContainer = ({
           </HeaderGroup>
         </HeaderFrameVideo>
       </Container>
-      {insideButton === "Search" && (
+      {insideButton === "Search" && title && overview && (
         <HeaderFeature>
           <HeaderFeatureCallOut>{title}</HeaderFeatureCallOut>
           <HeaderText>{overview}</HeaderText>

@@ -18,7 +18,7 @@ const useMovieId = (movieId) => {
 
       const filterData = data.results?.find(
         (video) => video.type === "Trailer"
-      );
+      ); 
       const trailer = filterData ? filterData : data.results[0];
 
       dispatch(addTrailer(trailer?.key));

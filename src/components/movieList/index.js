@@ -46,7 +46,7 @@ const MovieList = ({ title, movies }) => {
             onClick={() => handleClick("left")}
           />
 
-          {movies?.map((item) => {
+          {movies?.map((item, index) => {
             if (!item.poster_path) return;
             return (
               <CardItem key={item.id}>
@@ -55,8 +55,8 @@ const MovieList = ({ title, movies }) => {
                   alt={item.title}
                 />
                 <CardMeta>
-                  <CardSubTitle>item.title</CardSubTitle>
-                  <CardText>item.description</CardText>
+                  <CardSubTitle>{item.original_title}</CardSubTitle>
+                  <CardText>{item.overview}</CardText>
                 </CardMeta>
               </CardItem>
             );

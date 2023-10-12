@@ -71,7 +71,7 @@ export const CardMeta = styled.div`
   position: absolute;
   bottom: 0;
   padding: 10px;
-  background-color: #0000008f;
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 export const CardEntities = styled.div`
@@ -135,9 +135,20 @@ export const CardItem = styled.div`
   }
 
   @media (min-width: 1000px) {
+    &:hover {
+      height: 350px;
+      border-radius: 10px;
+    }
+  }
+
+  @media (min-width: 1000px) {
     &:hover ${CardMeta}, &:hover ${CardText}, &:hover ${CardSubTitle} {
-      display: block;
+      display: -webkit-box;
       z-index: 100;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
